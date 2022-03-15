@@ -1,1 +1,1 @@
-Place your lab 1 sources here
+You can use ```make``` in your terminal to build the project
