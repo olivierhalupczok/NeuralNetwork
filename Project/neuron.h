@@ -14,8 +14,8 @@
 
 #include "mathFuncs.h"
 
-#ifndef FLAG_H
-#define FLAG_H
+#ifndef NEURON_H
+#define NEURON_H
 
 class Neuron
 {
