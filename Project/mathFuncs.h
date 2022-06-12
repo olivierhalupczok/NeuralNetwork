@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2022
  *
  */
+
 #ifndef MATH_FUNCS_H
 #define MATH_FUNCS_H
 
@@ -18,5 +19,13 @@
  * @return double
  */
 double sigmoid(double arg);
+/**
+ * @brief return dot product of two two components vectors
+ *
+ * @param vector1
+ * @param vector2
+ * @return double dot product
+ */
+double dotProductOf2Vectors(std::vector<double> vector1, std::vector<double> vector2);
 
 #endif

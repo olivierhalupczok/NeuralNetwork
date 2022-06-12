@@ -9,17 +9,21 @@
  *
  */
 #include <iostream>
-#include <fstream>
-#include <sstream>
-#include <map>
 #include <vector>
-#include <iterator>
 
 #include "mathFuncs.h"
+#include "neuron.h"
 
 int main(int argc, char const *argv[])
 {
     // placeholder
+    std::vector<double> weights = {0, 1};
+    double bias = 4;
+    Neuron n(weights, bias, &sigmoid);
 
+    std::vector<double> inputs = {2, 3};
+    double temp = n.feedforward(inputs);
+
+    std::cout << temp;
     return 0;
 }

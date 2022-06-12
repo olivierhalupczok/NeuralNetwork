@@ -22,7 +22,6 @@ $(build_path)mathFuncs.o : mathFuncs.cpp
 $(build_path)neuron.o : neuron.cpp
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-
 $(build_path)main.o : main.cpp
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
