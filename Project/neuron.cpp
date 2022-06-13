@@ -12,8 +12,8 @@
 #include <vector>
 #include <functional>
 
-#include "neuron.h"
 #include "mathFuncs.h"
+#include "neuron.h"
 
 Neuron::Neuron(std::vector<double> weightsToInit, double biasToInit,  std::function<double(double)> activationFuncToInit) {
     weights = weightsToInit;

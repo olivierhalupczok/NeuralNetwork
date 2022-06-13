@@ -22,10 +22,13 @@ $(build_path)mathFuncs.o : mathFuncs.cpp
 $(build_path)neuron.o : neuron.cpp
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
+$(build_path)neuralNetwork.o : neuralNetwork.cpp
+	@mkdir -p build
+	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
 $(build_path)main.o : main.cpp
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)main : $(build_path)main.o $(build_path)mathFuncs.o $(build_path)neuron.o
+$(build_path)main : $(build_path)main.o $(build_path)mathFuncs.o $(build_path)neuron.o $(build_path)neuralNetwork.o
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -o $@ $^
 
