@@ -11,7 +11,11 @@ double sigmoid(double arg)
 {
     return 1 / (1 + std::exp(-arg));
 }
-
+double deriv_sigmoid(double arg)
+{
+    auto fx = sigmoid(arg);
+    return fx * (1 - fx);
+}
 double dotProductOf2Vectors(std::vector<double> vector1, std::vector<double> vector2)
 {
 

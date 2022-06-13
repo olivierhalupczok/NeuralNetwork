@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
 {
     // placeholder
     std::vector<double> weights = {0, 1};
-    double bias = 4;
+    double bias = 0;
     // Neuron n(weights, bias, &sigmoid);
     NeuralNetwork net(weights, bias, &sigmoid);
 

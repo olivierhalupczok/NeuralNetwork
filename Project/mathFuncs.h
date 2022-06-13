@@ -20,6 +20,13 @@
  */
 double sigmoid(double arg);
 /**
+ * @brief return value of derivative of sigmoid
+ *
+ * @param arg
+ * @return double
+ */
+double deriv_sigmoid(double arg);
+/**
  * @brief return dot product of two two components vectors
  *
  * @param vector1
