@@ -34,5 +34,13 @@ double deriv_sigmoid(double arg);
  * @return double dot product
  */
 double dotProductOf2Vectors(std::vector<double> vector1, std::vector<double> vector2);
+/**
+ * @brief calculate mean squarred error of the neural network
+ *
+ * @param outputTrue labels of data
+ * @param outputPredicted guesses of network
+ * @return double return mean squarred error
+ */
+double calc_mse_loss(std::vector<double> outputTrue, std::vector<double> outputPredicted);
 
 #endif

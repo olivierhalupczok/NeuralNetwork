@@ -32,3 +32,14 @@ double dotProductOf2Vectors(std::vector<double> vector1, std::vector<double> vec
     }
     return buffer;
 }
+double calc_mse_loss(std::vector<double> outputTrue, std::vector<double> outputPredicted)
+{
+    auto numOfSamples = outputTrue.size();
+    double accumulator = 0;
+    for (size_t i = 0; i < numOfSamples; i++)
+    {
+        auto currentError = outputTrue[i] - outputPredicted[i];
+        accumulator += currentError * currentError;
+    }
+    return (accumulator / numOfSamples);
+}
