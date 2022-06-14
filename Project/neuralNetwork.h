@@ -10,6 +10,8 @@
  */
 
 #include <vector>
+#include <chrono>
+#include <random>
 
 #include "neuron.h"
 
@@ -24,6 +26,7 @@ private:
      *
      */
     std::vector<Neuron> neurons;
+    std::default_random_engine engine; /** random number engine **/
 
 public:
     /**
@@ -33,7 +36,7 @@ public:
      * @param biasNeuron initial bias for every neuron created at the very beginning
      * @param activationFunc activationFunc to activate every neuron it is constant for a lifespan of the neuron
      */
-    NeuralNetwork(std::vector<double> weightsVector, double biasNeuron, std::function<double(double)> activationFunc);
+    NeuralNetwork(std::vector<double> weightsVector, double biasNeuron, std::function<double(double)> activationFunc, std::function<double(double)> activationFuncDeriv);
     /**
      * @brief feedforward every neuron from hidden layer
      *
@@ -41,6 +44,8 @@ public:
      * @return double output of the output neuron
      */
     double feedforward(std::vector<double> inputs);
+
+    void train(long long int epochs, std::vector<std::vector<double>> inputData, std::vector<double> labels);
 };
 
 #endif
