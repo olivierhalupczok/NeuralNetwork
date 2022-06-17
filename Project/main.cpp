@@ -16,9 +16,10 @@
 #include "networkResult.h"
 #include "neuralNetwork.h"
 
+size_t epochCount = 0;
 void logResults(NetworkResult res)
 {
-    std::cout << res;
+    std::cout << ++epochCount <<" "<< res<<std::endl;
     return;
 }
 
