@@ -98,7 +98,7 @@ public:
      * @param lossDeriv_outDeriv 
      * @param iterator 
      */
-    void adjustWeight(size_t index, Neuron outputNeuron, std::function<double(double)> lossDeriv_outDeriv, size_t iterator);
+    void adjustWeight(size_t index, Neuron outputNeuron,double lossDeriv_outDeriv_calced, size_t iterator);
     /**
      * @brief use backprop to adjust bias and to train network
      *
@@ -106,7 +106,7 @@ public:
      * @param lossDeriv_outDeriv
      * @param iterator
      */
-    void adjustBias(Neuron outputNeuron, std::function<double(double)> lossDeriv_outDeriv, size_t iterator);
+    void adjustBias(Neuron outputNeuron, double lossDeriv_outDeriv_calced, size_t iterator);
     /**
      * @brief Get the Output calculated during feedforward's execution
      *

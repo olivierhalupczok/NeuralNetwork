@@ -42,6 +42,6 @@ double dotProductOf2Vectors(std::vector<double> vector1, std::vector<double> vec
  * @return double return mean squarred error
  */
 double calc_mse_loss(std::vector<double> outputTrue, std::vector<double> outputPredicted);
-double lossDeriv_outDeriv(double output);
+double lossDeriv_outDeriv(double label, double output);
 
 #endif

@@ -10,16 +10,21 @@
  */
 #include <iostream>
 #include <vector>
+#include <functional>
 
 #include "mathFuncs.h"
-// #include "neuron.h"
+#include "networkResult.h"
 #include "neuralNetwork.h"
+
+void logResults(NetworkResult res)
+{
+    std::cout << res;
+    return;
+}
 
 int main(int argc, char const *argv[])
 {
-    std::vector<double> weights = {1, 1};
-    double bias = 0;
-    NeuralNetwork net(weights, bias, &sigmoid, &deriv_sigmoid);
+    NeuralNetwork net(2, &sigmoid, &deriv_sigmoid, 1);
 
     std::vector<double> alice = {-2, -1};
     std::vector<double> bob = {25, 6};
@@ -28,10 +33,9 @@ int main(int argc, char const *argv[])
 
     std::vector<std::vector<double>> inputs = {
         alice,
-        // bob,
-        // charlie,
-        // diana
-    };
+        bob,
+        charlie,
+        diana};
 
     double aliceSex = 1;
     double bobSex = 0;
@@ -40,9 +44,11 @@ int main(int argc, char const *argv[])
 
     std::vector<double> labels = {
         aliceSex,
-        // bobSex,
-        // charlieSex,
-        // dianaSex
+        bobSex,
+        charlieSex,
+        dianaSex
+
     };
-    net.train(1, inputs, labels);
+
+    net.train(200, inputs, labels, &logResults);
 }

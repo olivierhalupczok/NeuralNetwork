@@ -53,7 +53,7 @@ double calc_mse_loss(std::vector<double> outputTrue, std::vector<double> outputP
     }
     return (accumulator / numOfSamples);
 }
-double lossDeriv_outDeriv(double output)
+double lossDeriv_outDeriv(double label,double output)
 {
-    return -2 * (1 - output);
+    return -2 * (label - output);
 }

@@ -51,10 +51,9 @@ double Neuron::getTotal()
     return total;
 }
 
-void Neuron::adjustWeight(size_t index, Neuron outputNeuron, std::function<double(double)> lossDeriv_outDeriv, size_t iterator)
+void Neuron::adjustWeight(size_t index, Neuron outputNeuron, double lossDeriv_outDeriv_calced, size_t iterator)
 {
     auto outWeightIndex = iterator == 2 ? index : iterator;
-    auto lossDeriv_outDeriv_calced = lossDeriv_outDeriv(outputNeuron.getOutput());
     auto outDeriv_neuronDeriv_calced = outputNeuron.getWeights().at(outWeightIndex) * activationFuncDerivative(outputNeuron.getTotal());
     auto neuronDeriv_weightDeriv_calced = inputs[index] * activationFuncDerivative(total);
 
@@ -62,12 +61,11 @@ void Neuron::adjustWeight(size_t index, Neuron outputNeuron, std::function<doubl
 
     weights[index] -= (learningRate * lossDerivweightDeriv);
 }
-void Neuron::adjustBias(Neuron outputNeuron,std::function<double(double)> lossDeriv_outDeriv, size_t iterator)
+void Neuron::adjustBias(Neuron outputNeuron,double lossDeriv_outDeriv_calced, size_t iterator)
 {
-    auto lossDeriv_outDeriv_calced = lossDeriv_outDeriv(outputNeuron.getOutput());
     auto outDeriv_neuronDeriv_calced =  iterator == 2 ? 1 : outputNeuron.getWeights().at(iterator) * activationFuncDerivative(outputNeuron.getTotal());
     auto neuronDeriv_biasDeriv = activationFuncDerivative(total);
-
+    
     auto lossDerivBiasDeriv = lossDeriv_outDeriv_calced * outDeriv_neuronDeriv_calced * neuronDeriv_biasDeriv;
 
     bias -= (learningRate * lossDerivBiasDeriv);

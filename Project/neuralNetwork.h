@@ -12,8 +12,10 @@
 #include <vector>
 #include <chrono>
 #include <random>
+#include <functional>
 
 #include "neuron.h"
+#include "networkResult.h"
 
 #ifndef NEURAL_NETWORK_H
 #define NEURAL_NETWORK_H
@@ -36,7 +38,7 @@ public:
      * @param biasNeuron initial bias for every neuron created at the very beginning
      * @param activationFunc activationFunc to activate every neuron it is constant for a lifespan of the neuron
      */
-    NeuralNetwork(std::vector<double> weightsVector, double biasNeuron, std::function<double(double)> activationFunc, std::function<double(double)> activationFuncDeriv);
+    NeuralNetwork(size_t numOfNeurons, std::function<double(double)> activationFunc, std::function<double(double)> activationFuncDeriv, double learningRate );
     /**
      * @brief feedforward every neuron from hidden layer
      *
@@ -45,7 +47,7 @@ public:
      */
     double feedforward(std::vector<double> inputs);
 
-    void train(long long int epochs, std::vector<std::vector<double>> inputData, std::vector<double> labels);
+    void train(long long int epochs, std::vector<std::vector<double>> inputData, std::vector<double> labels, std::function<void(NetworkResult)> callback);
 };
 
 #endif
