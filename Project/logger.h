@@ -12,7 +12,7 @@ private:
     const std::string OUTPUT_NOT_SET_EXCEPTION = "Output of the Logger has not been set yet";
 
 public:
-    Logger(/* args */);
+    Logger();
     template <class T>
     void log(const T &&dataToLog);
     void setOutputStream(std::ostream &stream);
@@ -25,11 +25,9 @@ class CSV_Logger : public Logger
 {
 private:
     std::ofstream logFile;
-    bool isLabelsSet;
 public:
     CSV_Logger(std::string path);
     ~CSV_Logger();
-    void setLabels();
 };
 
 

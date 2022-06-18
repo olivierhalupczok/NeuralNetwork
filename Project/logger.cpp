@@ -54,17 +54,7 @@ template Logger &Logger::operator<< <long long int>(long long int &&dataToLog);
 template Logger &Logger::operator<< <NetworkResult&>(NetworkResult &dataToLog);
 // template Logger &Logger::operator<< <NetworkResult&>(NetworkResult &dataToLog);
 
-// DebugLogger::DebugLogger() {
-//     std::string path = "logs/log.txt"
-//     logFile.open();
-//     setOutputStream(logFile);
-// }
-// DebugLogger::~DebugLogger() {
-//     logFile.close();
-// }
-
 CSV_Logger:: CSV_Logger(std::string path) : Logger() {
-    isLabelsSet = false;
     logFile.open(path);
     std::cout<<path;
     setOutputStream(logFile);

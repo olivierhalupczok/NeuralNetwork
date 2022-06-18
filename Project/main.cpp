@@ -57,5 +57,5 @@ int main(int argc, char const *argv[])
     };
 
     net.train(200, inputs, labels, &logResults);
-    std::cout<<"output file is ready";
+    std::cout<<" - output file is ready\n";
 }
