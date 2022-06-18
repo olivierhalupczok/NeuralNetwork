@@ -1,6 +1,6 @@
 /**
  * @file neuralNetwork.cpp
- * @author your name (you@domain.com)
+ * @author Olivier Halupczok
  * @brief
  * @version 0.1
  * @date 2022-06-13

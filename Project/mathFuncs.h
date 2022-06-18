@@ -1,7 +1,7 @@
 /**
  * @file mathFuncs.h
  * @author Olivier Halupczok
- * @brief
+ * @brief library with math functions used in the program
  * @version 0.1
  * @date 2022-06-12
  *
@@ -42,6 +42,13 @@ double dotProductOf2Vectors(std::vector<double> vector1, std::vector<double> vec
  * @return double return mean squarred error
  */
 double calc_mse_loss(std::vector<double> outputTrue, std::vector<double> outputPredicted);
+/**
+ * @brief it calculates value of the derivative of the Loss' function of the whole network divided by the derivative of output value's(of the entire network) function
+ *
+ * @param label labels of the learning dataset
+ * @param output output value of net
+ * @return double calculated derivative
+ */
 double lossDeriv_outDeriv(double label, double output);
 
 #endif

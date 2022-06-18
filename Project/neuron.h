@@ -60,6 +60,10 @@ private:
      *
      */
     double output;
+    /**
+     * @brief determines if feedworward method was called beforehand
+     * 
+     */
     bool isOutputAndTotalSet;
 
 public:

@@ -1,3 +1,13 @@
+/**
+ * @file mathFuncs.cpp
+ * @author Olivier Halupczok
+ * @brief Library with math functions used in the program
+ * @version 0.1
+ * @date 2022-06-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <math.h>
 #include <vector>
 #include <iostream>

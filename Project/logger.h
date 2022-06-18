@@ -1,3 +1,13 @@
+/**
+ * @file logger.h
+ * @author Olivier Halupczok
+ * @brief declarations of the logger library
+ * @version 0.1
+ * @date 2022-06-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <iostream>
 #include <fstream>
 
