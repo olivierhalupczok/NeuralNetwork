@@ -16,16 +16,6 @@ void Logger::setOutputStream(std::ostream &stream)
 }
 
 template <class T>
-void Logger::log(const T &&dataToLog)
-{
-    if (!isOutputSet)
-    {
-        throw std::invalid_argument(OUTPUT_NOT_SET_EXCEPTION);
-    }
-    *outputStream << std::forward<T>(dataToLog);
-}
-
-template <class T>
 Logger &Logger::operator<<(T &&dataToLog)
 {
     if (!isOutputSet)
