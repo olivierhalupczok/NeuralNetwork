@@ -8,6 +8,8 @@ build_path = build/
 
 
 __ : $(build_path)main
+	@mkdir -p logs
+	@cd ..
 	@echo
 	@echo ./$(build_path)main
 	@echo -----------------------
@@ -28,10 +30,13 @@ $(build_path)neuron.o : neuron.cpp
 $(build_path)neuralNetwork.o : neuralNetwork.cpp
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
+$(build_path)logger.o : logger.cpp
+	@mkdir -p build
+	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
 $(build_path)main.o : main.cpp
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)main : $(build_path)main.o $(build_path)mathFuncs.o $(build_path)neuron.o $(build_path)neuralNetwork.o $(build_path)networkResult.o
+$(build_path)main : $(build_path)main.o $(build_path)mathFuncs.o $(build_path)neuron.o $(build_path)neuralNetwork.o $(build_path)networkResult.o $(build_path)logger.o
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -o $@ $^
 

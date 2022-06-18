@@ -74,6 +74,10 @@ std::vector<double> Neuron::getWeights()
 {
     return weights;
 }
+double Neuron::getBias()
+{
+    return bias;
+}
 double Neuron::getOutput()
 {
     if (!isOutputAndTotalSet)

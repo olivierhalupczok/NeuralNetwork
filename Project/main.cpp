@@ -15,16 +15,21 @@
 #include "mathFuncs.h"
 #include "networkResult.h"
 #include "neuralNetwork.h"
+#include "logger.h"
 
-size_t epochCount = 0;
+size_t epochCount = 1;
+CSV_Logger logger("logs/output.csv");
+
 void logResults(NetworkResult res)
-{
-    std::cout << ++epochCount <<" "<< res<<std::endl;
+{   
+    logger << epochCount++ <<std::string("  ")<< res << std::endl;
     return;
 }
 
 int main(int argc, char const *argv[])
 {
+    logger << std::string("epoch    loss") << std::endl;
+
     NeuralNetwork net(2, &sigmoid, &deriv_sigmoid, 1);
 
     std::vector<double> alice = {-2, -1};

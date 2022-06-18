@@ -91,6 +91,12 @@ public:
      */
     std::vector<double> getWeights();
     /**
+     * @brief Get the Bias property
+     *
+     * @return double bias of the neuron
+     */
+    double getBias();
+    /**
      * @brief use backprop to adjust weight of specified index and to train network by doing so
      * 
      * @param index 
