@@ -62,12 +62,12 @@ void NeuralNetwork::train(long long int epochs, std::vector<std::vector<double>>
         {
             double output = feedforward(inputData.at(t));
             auto outputNeuron = *(neurons.end() - 1);
-            std::vector<double> currentInputs = inputData.at(t);
+
+            auto lossDerivCalced = lossDeriv_outDeriv(labels[t], output);
 
             for (auto it = neurons.begin(); it != neurons.end(); it++)
             {
                 auto iteration = it - neurons.begin();
-                auto lossDerivCalced = lossDeriv_outDeriv(labels[t], output);
 
                 it->adjustWeight(0, outputNeuron, lossDerivCalced, iteration);
                 it->adjustWeight(1, outputNeuron, lossDerivCalced, iteration);
