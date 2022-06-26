@@ -37,7 +37,7 @@ double dotProductOf2Vectors(std::vector<double> vector1, std::vector<double> vec
 /**
  * @brief calculate mean squarred error of the neural network
  *
- * @param outputTrue labels of data
+ * @param outputTrue labels of dataargumentsHandler
  * @param outputPredicted guesses of network
  * @return double return mean squarred error
  */

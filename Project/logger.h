@@ -26,7 +26,7 @@ private:
      * @brief bool which determine if OutputStream was set yet
      *
      */
-    bool isOutputSet;
+    bool _isOutputSet;
     /**
      * @brief Constant exception message displayed if the logger is called to log without specifying an output stream before
      *
@@ -45,6 +45,11 @@ public:
      * @param stream which the logs will be forwarded to
      */
     void setOutputStream(std::ostream &stream);
+    /**
+     * @brief check if output is set, if not then throw an exception
+     * 
+     */
+    void isOutputSet();
     /**
      * @brief Log data with << operator.
      *
@@ -71,6 +76,9 @@ private:
      *
      */
     std::ofstream logFile;
+    char separator = '  ';
+    size_t dataColumns;
+    const std::string TOO_FEW_LABELS_EXCEPTION = "You have to insert at least 1 label";
 
 public:
     /**
@@ -84,6 +92,18 @@ public:
      *
      */
     ~CSV_Logger();
+    /**
+     * @brief prints labels into output csv file
+     * 
+     * @param labels 
+     */
+    void setLabels(std::vector<std::string>& labels);
+    /**
+     * @brief Set the Separator property
+     * 
+     * @param separator 
+     */
+    void setSeparator(const char separator);
 };
 
 #endif
