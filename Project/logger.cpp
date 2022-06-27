@@ -11,7 +11,6 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <iterator>
 
 #include "networkResult.h"
 #include "logger.h"
@@ -74,10 +73,12 @@ void CSV_Logger::setLabels(std::vector<std::string> &labels)
         throw std::invalid_argument(TOO_FEW_LABELS_EXCEPTION);
     }
 
-    for (size_t i = 0; i < dataColumns; i++)
+    *this << labels[0];
+    for (size_t i = 1; i < dataColumns; i++)
     {
-        *this << (!i ? separator : (char)"") << labels[i];
+        *this << separator << labels[i];
     }
+    *this << std::endl;
 }
 void CSV_Logger::setSeparator(char _separator) {
     separator=_separator;

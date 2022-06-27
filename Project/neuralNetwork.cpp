@@ -67,7 +67,7 @@ void NeuralNetwork::train(long long int epochs, std::vector<std::vector<double>>
 
             for (auto it = neurons.begin(); it != neurons.end(); it++)
             {
-                auto iteration = it - neurons.begin();
+                auto iteration = std::distance(neurons.begin(), it);
 
                 it->adjustWeight(0, outputNeuron, lossDerivCalced, iteration);
                 it->adjustWeight(1, outputNeuron, lossDerivCalced, iteration);

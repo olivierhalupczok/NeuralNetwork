@@ -76,7 +76,7 @@ private:
      *
      */
     std::ofstream logFile;
-    char separator = '  ';
+    char separator = '\t';
     size_t dataColumns;
     const std::string TOO_FEW_LABELS_EXCEPTION = "You have to insert at least 1 label";
 
