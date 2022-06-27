@@ -4,3 +4,7 @@
 makefile*
 /logs
 *.csv
+/html
+/latex
+*.pdf
+report.*
