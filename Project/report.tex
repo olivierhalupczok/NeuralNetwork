@@ -143,43 +143,43 @@ escapeinside={(*@}{@*)},%
 \frenchspacing
 \thispagestyle{empty}
 \begin{center}
-{\Large\sf Politechnika Śląska   % Alma Mater
+   {\Large\sf Politechnika Śląska   % Alma Mater
 
-Wydział Informatyki, Elektroniki i Informatyki
+      Wydział Informatyki, Elektroniki i Informatyki
 
-}
+   }
 
-\vfill
-
- 
-
-\vfill\vfill
-
-{\Huge\sffamily\bfseries Computer Programming\par}
-
-\vfill\vfill
-
-{\LARGE\sf «Neural Network»} 
-
-
-\vfill \vfill\vfill\vfill
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \vfill
 
 
 
+   \vfill\vfill
+
+   {\Huge\sffamily\bfseries Computer Programming\par}
+
+   \vfill\vfill
+
+   {\LARGE\sf «Neural Network»}
 
 
-\begin{tabular}{ll}
-	\toprule
-	author     & Olivier Halupczok                           \\
-	instructor & dr inż. Piotr Fabian \\
-	year       & \2021-2022                     \\
-	lab group  & even Tuesday, 10:15 -- 11:45             \\
-	deadline   & 2022-06-24                         \\
-	\bottomrule
-	           &
-\end{tabular}
+   \vfill \vfill\vfill\vfill
+
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+   \begin{tabular}{ll}
+      \toprule
+      author     & Olivier Halupczok            \\
+      instructor & dr inż. Piotr Fabian         \\
+      year       & \2021-2022                   \\
+      lab group  & even Tuesday, 10:15 -- 11:45 \\
+      deadline   & 2022-06-30                   \\
+      \bottomrule
+                 &
+   \end{tabular}
 
 \end{center}
 %%% koniec strony  tytulowej
@@ -191,8 +191,19 @@ Wydział Informatyki, Elektroniki i Informatyki
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Project's topic}
 % \marginpar{Put precise description of your task – copy it from your instructor's task list.}
-Simple Neural Network defined as a class that supports Neurons., configuring a user-defined connection structure, selected learning methid.
+Implement Simple Neural Network defined as a class that supports Neurons, configuring a user-defined connection structure, selected learning method.
+
+Porgram input data are stored in the root folder in the input.csv file.
+Input file holds following CSV format:
+\begin{verbatim}
+Label-Header    Header1    Header2    Header-i
+Label1   DataFeature1   DataFeature2   DataFeature-i
+Label2   DataFeature1   DataFeature2   DataFeature-i
+Label3   DataFeature1   DataFeature2   DataFeature-i
+Label4   DataFeature1   DataFeature2   DataFeature-i
+...
 \end{verbatim}
+Then the program analyzes features and labels and on their basis calculates the loss funcion's value. Derivative of this function is used to adjust weights and biases of the Neurons in the object of Neural Network class.
 % \marginpar{Use a serif font for the main text. Justify the text (left and right alignment).}
 
 % The program is called with parameters: 
@@ -208,28 +219,22 @@ Simple Neural Network defined as a class that supports Neurons., configuring a u
 \section{Analysis of the task}
 % \marginpar{Analyse the task before you start to implement it! Describe data structures and algorithms.}
 
-The task focuses on the analyzing data given as an input dataset and predicting the feature of the object. It requires implementation of the learning algorithm and minimizing loss of the entire neural network.
+The task focuses on the analyzing data given as an input dataset and predicting the label of the object. It requires implementation of the learning algorithm and minimizing loss of the entire neural network.
 
 \subsection{Data structures}
 % \marginpar{Describe data structures you use in your project (lists, trees, heaps, , \ldots). Explain your choice. Add a figure.}
-Program has used a lot of vectors and objects of custom classes. Vectors were used to store serial data and other structures. I implemented Neuron as a class as well to make calculations easier and to order them to the proper objects.
+The program uses data structures like vector and set. The target of using set is to store labels, loaded from input file, and store it in a structure, which stores only unique values. This simplifies counting the number of unique labels, which are then encoded and passed to the neural network as an argument. Program uses also various custom classes like \lstline|NeuralNetwork|, \lstline|Neurons|,  \lstline|Neuron|, to organize data in convenient way, which is assumed by the concept of Neural Network and its common understanding.
 
 \subsection{Algorithms}
-The program loads input, create an instance of Neural Network Class. While calling a constructor of the Neural Network, it creates Neurons of the specified amount in the constructor parameter. When the train method is called then Network is iterating throughout the input dataset and call the loss of every iteration(epoch) and on its basis adjust the weights and biases of every Neuron.
+To achieve the main goal of the function, Program uses algorithm called Stochastic Gradient Descent to adjust properties of the neurons: weights and biases. These properties are elements to calculate a value of the neuron using activation function which is passed to a constructor of the neuron object along with its derivative. The default activation function is sigmoid function: $$ sigmoid(x) = \frac{\mathrm{1} }{\mathrm{1} + e^{-x} }  $$, where $$ x_{i,j} =  \overrightarrow{inputs}  \circ  \overrightarrow{weights} +  b_{i,j} $$, \texttt{i} is the index of the layer, \texttt{j} is the index of the neuron in the \texttt{i-th} layer. Inputs for the neuron are values of the neurons in the previous layer. Input of the neuron is passed as the vector of double type variables. In the same way inputs of the whole neural network are passed. Weights are also stored as a vector. Storing both of those properties as vectors let the program easily calculate a dot product of them. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{External specification}
 \label{sec:external}
 This is a command line program.%
-You can execute a program by using compiled .exe file or by using make in the e.g. Bash terminal.
-The program requires input datasets specified in the main.cpp
-
-Program call
-\begin{verbatim}
-program 
-program -h
-\end{verbatim}
-prints a short manual. Program called with incorrect parameters prints an error message and prints help.
+You can execute a program by using compiled .exe or .o file or by using make in the e.g. Bash terminal.
+The program requires input datasets specified in the input file.
 
 After execution you can find output file in the following direction:
 \begin{verbatim}
@@ -241,36 +246,34 @@ You have to ensure yourself '/logs' directory exists, otherwise output file won'
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Internal specification}\label{sec:internal}
-The program is implemented with object-oriented, structural and functional paradigm. User interface is separated from program's logic.
+The program is implemented with object-oriented, structural and functional paradigm. User interface is separated from program's logic by using relevant classes.
 
- 
+
 
 \subsection{Program overview}
-The \lstinline|main| function checks number of arguments passed to the program and creates a new Options object, which constructor check parameters of the program. If the verification is negative, an appropriate message is printed. In case of positive verification, data are read and saved into vector, which is passed, simultaneously with the options object, to the constructor of an \lstinline|GenerationsFactory| object. Then \lstinline|GenerationsFactory::makeGenerations| method performs genetic algorithm by creating first generation using objects of classes: \lstinline|Generation|, \lstinline|Individual|, and then it creates every another generation of individuals. Finally the program prints data into an output file.
+The \lstinline|main| function creates objects of several classes which, every of them has its own responsibility designated. In the begining we prepare an output file using an instance of CSV_Logger class. Then it creates instance of NeuralNetwork class and inputLoader. Function saves datased loaded from the loader and pass readed inputs and labels as arguments of the NeuralNetwork train method. At the end program informs about termination of the whole process.
 
 \subsection{Description of types and functions}
 Description of types and functions is moved to the appendix.
 
- 
+
 
 \section{Testing}
 % \marginpar{Describe how you have tested your program.}
 The program has been tested with various types of files. Incorrect files (with no numbers, numbers in incorrect format, strings with some invalid whitespaces, \ldots) are detected and an error message is printed. An empty input file does not cause failure – an empty output file is created. Maximal number value(\lstinline!double!) in an input file is approximately 1.8e+308. Maximal input file size handled by the program is \mbox{1.57$\,$GB}. Larger files result in a bad allocation error. The program has no memory leaks.
- 
+
 
 
 \section{Conclusions}
 
-The program implements a solution to a knapsack problem using genetic algorithm. The most challenging task is creating a crossover system where a lot of data can be processed iteratively.
-
-For some parameters the program elaborates incorrect results on some machines. This is caused by specification of the algorithm which does not includes an evolution coeeficient. Algorithm also base on a small dose of randomness, and it can be succesfull if generation/individuals number is insufficient.
+The program implements a neural network. The most demanding task was to create a structure of the Neural Network and to preserve dataflow simple using features of objective and functional programming paradigm.
 
 
 \bibliographystyle{plain}
 \bibliography{\jobname}
 
- 
- 
+
+
 \cleardoublepage
 
 \rule{0cm}{0cm}
@@ -278,10 +281,10 @@ For some parameters the program elaborates incorrect results on some machines. T
 \vfill
 
 \begin{center}
-\Huge\bfseries Appendix\\Description of types and functions\par
+   \Huge\bfseries Appendix\\Description of types and functions\par
 \end{center}
 
-\vfill 
+\vfill
 
 \rule{0cm}{0cm}
 
