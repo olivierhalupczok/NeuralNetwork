@@ -174,7 +174,7 @@ escapeinside={(*@}{@*)},%
       \toprule
       author     & Olivier Halupczok            \\
       instructor & dr inż. Piotr Fabian         \\
-      year       & \2021-2022                   \\
+      year       & 2021-2022                    \\
       lab group  & even Tuesday, 10:15 -- 11:45 \\
       deadline   & 2022-06-30                   \\
       \bottomrule
@@ -223,10 +223,10 @@ The task focuses on the analyzing data given as an input dataset and predicting 
 
 \subsection{Data structures}
 % \marginpar{Describe data structures you use in your project (lists, trees, heaps, , \ldots). Explain your choice. Add a figure.}
-The program uses data structures like vector and set. The target of using set is to store labels, loaded from input file, and store it in a structure, which stores only unique values. This simplifies counting the number of unique labels, which are then encoded and passed to the neural network as an argument. Program uses also various custom classes like \lstline|NeuralNetwork|, \lstline|Neurons|,  \lstline|Neuron|, to organize data in convenient way, which is assumed by the concept of Neural Network and its common understanding.
+The program uses data structures like vector and set. The target of using set is to store labels, loaded from input file, and store it in a structure, which stores only unique values. This simplifies counting the number of unique labels, which are then encoded and passed to the neural network as an argument. Program uses also various custom classes like \lstinline|NeuralNetwork|, \lstinline|Neurons|,  \lstinline|Neuron|, to organize data in convenient way, which is assumed by the concept of Neural Network and its common understanding.
 
 \subsection{Algorithms}
-To achieve the main goal of the function, Program uses algorithm called Stochastic Gradient Descent to adjust properties of the neurons: weights and biases. These properties are elements to calculate a value of the neuron using activation function which is passed to a constructor of the neuron object along with its derivative. The default activation function is sigmoid function: $$ sigmoid(x) = \frac{\mathrm{1} }{\mathrm{1} + e^{-x} }  $$, where $$ x_{i,j} =  \overrightarrow{inputs}  \circ  \overrightarrow{weights} +  b_{i,j} $$, \texttt{i} is the index of the layer, \texttt{j} is the index of the neuron in the \texttt{i-th} layer. Inputs for the neuron are values of the neurons in the previous layer. Input of the neuron is passed as the vector of double type variables. In the same way inputs of the whole neural network are passed. Weights are also stored as a vector. Storing both of those properties as vectors let the program easily calculate a dot product of them. 
+To achieve the main goal of the function, Program uses algorithm called Stochastic Gradient Descent to adjust properties of the neurons: weights and biases. These properties are elements to calculate a value of the neuron using activation function which is passed to a constructor of the neuron object along with its derivative. The default activation function is sigmoid function: $$ sigmoid(x) = \frac{\mathrm{1} }{\mathrm{1} + e^{-x} }  $$, where $$ x_{i,j} =  \overrightarrow{inputs}  \circ  \overrightarrow{weights} +  b_{i,j} $$, \texttt{i} is the index of the layer, \texttt{j} is the index of the neuron in the \texttt{i-th} layer. Inputs for the neuron are values of the neurons in the previous layer. Input of the neuron is passed as the vector of double type variables. In the same way inputs of the whole neural network are passed. Weights are also stored as a vector. Storing both of those properties as vectors let the program easily calculate a dot product of them.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

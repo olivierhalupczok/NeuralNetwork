@@ -1,51 +1,46 @@
+
+
+# put here the path to your header files:
 compiler=g++
 standard=-std=c++20
 optimization=
 errors=-pedantic-errors
 build_path = build/
 
-.PHONY : clean 
 
+.PHONY: clean
+ 
 
-__ : $(build_path)main
-	@mkdir -p logs
-	@cd ..
-	@echo
-	@echo ./$(build_path)main
-	@echo -----------------------
-	@echo
-	@./$(build_path)main $(ARGS) 
-#   To pass the ARGS you have to run make ARGS={...}
-#	valgrind --leak-check=yes ./main
+__ : final-report.pdf
+	echo "done"
 
-$(build_path)mathFuncs.o : mathFuncs.cpp
-	@mkdir -p build
-	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)networkResult.o : networkResult.cpp
-	@mkdir -p build
-	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)neuron.o : neuron.cpp
-	@mkdir -p build
-	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)neuralNetwork.o : neuralNetwork.cpp
-	@mkdir -p build
-	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)logger.o : logger.cpp
-	@mkdir -p build
-	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)dataset.o : dataset.cpp
-	@mkdir -p build
-	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)inputLoader.o : inputLoader.cpp
-	@mkdir -p build
-	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)main.o : main.cpp
-	@mkdir -p build
-	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)main : $(build_path)main.o $(build_path)mathFuncs.o $(build_path)neuron.o $(build_path)neuralNetwork.o $(build_path)networkResult.o $(build_path)logger.o $(build_path)dataset.o $(build_path)inputLoader.o
-	@mkdir -p build
-	$(compiler) $(standard) $(debug) $(optimization) $(errors) -o $@ $^
+# concatenate report with doxygen documentation
+final-report.pdf : report.pdf refman.pdf
+	pdftk report.pdf ./latex/refman.pdf cat output final-report.pdf
 
+# report compilation
+report.pdf : report.tex
+	pdflatex report
+	bibtex   report
+	pdflatex report
+	pdflatex report
 
-clean : 
-	rm main $(build_path)mathFuncs.o $(build_path)main.o 
+# doxygen compilation
+refman.pdf : neuron.h neuralNetwork.h networkResult.h mathFuncs.h logger.h
+	doxygen 
+	$(MAKE) -C latex
+	cp ./latex/refman.pdf .
+	
+# generate configuration file for doxygen
+Doxyfile : 
+	doxygen -g 	
+	mv Doxyfile doxy
+	cat doxy | sed -e 's/INPUT[ \t]\+=/INPUT = ./g' | sed -e 's/UML_LOOK[ \t]\+=[ \t]\+NO/UML_LOOK = YES/g' | sed -e 's/PROJECT_NAME[ \t]\+=[ \t]\+"My Project"/PROJECT_NAME = "Fundamentals of Computer Programming: Project"/g' | sed -e 's/FULL_PATH_NAMES[ \t]\+=[ \t]\+YES/FULL_PATH_NAMES = NO/g'  | sed -s 's/GENERATE_HTML[ \t]\+=[ \t]\+YES/GENERATE_HTML = NO/g' > Doxyfile 
+	rm doxy 
+	
+# remove temporary files
+clean : 	
+	for f in `ls doxy Doxyfile *.aux *.log *.out *.gz *.bib *.blg *.bbl *.o *~ refman.pdf report.pdf` ; do  if [ -f $$f ] ; then rm $$f  ; fi;   done;
+	if [ -d latex ] ; then rm -r latex ; fi ;
+	if [ -d html ]  ; then rm -r html  ; fi ;
+	

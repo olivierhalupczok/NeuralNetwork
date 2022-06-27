@@ -71,10 +71,6 @@ public:
 class CSV_Logger : public Logger
 {
 private:
-    /**
-     * @brief file to print CSV data
-     *
-     */
     std::ofstream logFile;
     char separator = '\t';
     size_t dataColumns;
