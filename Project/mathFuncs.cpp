@@ -4,9 +4,9 @@
  * @brief Library with math functions used in the program
  * @version 0.1
  * @date 2022-06-18
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 #include <math.h>
 #include <vector>
@@ -66,4 +66,23 @@ double calc_mse_loss(std::vector<double> outputTrue, std::vector<double> outputP
 double lossDeriv_outDeriv(double label, double output)
 {
     return -2 * (label - output);
+}
+std::vector<double> softmax(std::vector<double> inputs)
+{
+    double total = 0;
+    for (auto &&element : inputs)
+    {
+        element = std::pow(std::exp(element), element);
+        total += element;
+    }
+    double denominator = 1 / total;
+    return multiplyVectorByNum(inputs, denominator);
+}
+std::vector<double> multiplyVectorByNum(std::vector<double> input, double num)
+{
+    for (auto &&i : input)
+    {
+        i *= num;
+    }
+    return input;
 }
