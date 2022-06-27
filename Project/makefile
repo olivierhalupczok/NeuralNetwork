@@ -33,10 +33,16 @@ $(build_path)neuralNetwork.o : neuralNetwork.cpp
 $(build_path)logger.o : logger.cpp
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
+$(build_path)dataset.o : dataset.cpp
+	@mkdir -p build
+	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
+$(build_path)inputLoader.o : inputLoader.cpp
+	@mkdir -p build
+	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
 $(build_path)main.o : main.cpp
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -c -o $@ $^
-$(build_path)main : $(build_path)main.o $(build_path)mathFuncs.o $(build_path)neuron.o $(build_path)neuralNetwork.o $(build_path)networkResult.o $(build_path)logger.o
+$(build_path)main : $(build_path)main.o $(build_path)mathFuncs.o $(build_path)neuron.o $(build_path)neuralNetwork.o $(build_path)networkResult.o $(build_path)logger.o $(build_path)dataset.o $(build_path)inputLoader.o
 	@mkdir -p build
 	$(compiler) $(standard) $(debug) $(optimization) $(errors) -o $@ $^
 
